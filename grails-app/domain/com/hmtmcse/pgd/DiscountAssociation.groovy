@@ -4,6 +4,8 @@ class DiscountAssociation {
 
     Integer id
     String name
+    String code
+    Boolean isActive = true
 
     Set<Customer> customers = []
     Set<CustomerGroup> customerGroups = []
@@ -11,6 +13,7 @@ class DiscountAssociation {
     Set<Category> categories = []
 
 
+    static hasMany = [customers: Customer, customerGroups: CustomerGroup, products: Product, categories: Category]
 
     static constraints = {
         customers(nullable: true)
