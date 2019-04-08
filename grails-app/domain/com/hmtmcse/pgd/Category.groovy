@@ -6,6 +6,10 @@ class Category {
     String name
 
 
+    Set<Product> products = []
+    static hasMany = [products: Product]
+
+
     static constraints = {
     }
 }
