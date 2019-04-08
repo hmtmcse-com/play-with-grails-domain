@@ -42,6 +42,11 @@ class InitDataService {
                 productDomain.addToCategories(it)
             }
             productDomain.save()
+            if (productDomain.hasErrors()){
+                productDomain.errors.each {
+                    println(it)
+                }
+            }
         }
     }
 
@@ -61,10 +66,10 @@ class InitDataService {
         CustomerGroup regularCustomer = CustomerGroup.findByName("Regular")
         CustomerGroup vipCustomer = CustomerGroup.findByName("VIP")
         [
-                [name: "Abul", email: "abul@pgd.local", gruops:[], baseGroup: customerGroupBase],
-                [name: "Kabul", email: "abul@pgd.local", gruops:[regularCustomer], baseGroup: null],
-                [name: "Maya", email: "abul@pgd.local", gruops:[vipCustomer], baseGroup: null],
-                [name: "Nishi", email: "abul@pgd.local", gruops:[regularCustomer], baseGroup: customerGroupBase],
+                [name: "Abul", email: "abul@pgd.local", password: "123456", gruops:[], baseGroup: customerGroupBase],
+                [name: "Kabul", email: "abul@pgd.local", password: "123456", gruops:[regularCustomer], baseGroup: null],
+                [name: "Maya", email: "abul@pgd.local", password: "123456", gruops:[vipCustomer], baseGroup: null],
+                [name: "Nishi", email: "abul@pgd.local", password: "123456", gruops:[regularCustomer], baseGroup: customerGroupBase],
         ].each { customer ->
            Customer customerDomain = new Customer(customer)
             if (customer.baseGroup){
@@ -74,6 +79,11 @@ class InitDataService {
                 customerDomain.addToCustomerGroups(it)
             }
             customerDomain.save()
+            if (customerDomain.hasErrors()){
+                customerDomain.errors.each {
+                    println(it)
+                }
+            }
         }
     }
 
@@ -83,6 +93,11 @@ class InitDataService {
         discountAssociation.addToCustomers(Customer.findByName("Kabul"))
         discountAssociation.addToCategories(Category.findByName("Dell"))
         discountAssociation.save()
+        if (discountAssociation.hasErrors()){
+            discountAssociation.errors.each {
+                println(it)
+            }
+        }
 
         discountAssociation = new DiscountAssociation(name: "Summer Assoc For VIP Customer Group & Apple", code: "DA-APPLE")
         discountAssociation.addToCustomerGroups(CustomerGroup.findByName("VIP"))
@@ -90,6 +105,11 @@ class InitDataService {
         discountAssociation.addToProducts(Product.findByName("MackBook Air 13-inch"))
         discountAssociation.addToProducts(Product.findByName("MackBook Pro 13-inch"))
         discountAssociation.save()
+        if (discountAssociation.hasErrors()){
+            discountAssociation.errors.each {
+                println(it)
+            }
+        }
     }
 
     def discount(){

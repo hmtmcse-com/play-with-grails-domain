@@ -9,7 +9,9 @@ class Customer {
     CustomerGroup baseCustomerGroup
     Set<CustomerGroup> customerGroups
 
+    static belongsTo = CustomerGroup
     static hasMany = [customerGroups: CustomerGroup]
+    static mappedBy = [ baseCustomerGroup: "none"]
 
     static constraints = {
         baseCustomerGroup(nullable: true)
