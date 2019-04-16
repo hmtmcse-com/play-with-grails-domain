@@ -119,6 +119,18 @@ class InitDataService {
         )
     }
 
+    def packager(){
+        [
+                [code: "D1", quantity: 2, name: "Dhaka"],
+                [code: "D1", quantity: 1, name: "Dhaka Mohakhali"],
+                [code: "D1", quantity: 5, name: "Dhaka Mirpur"],
+                [code: "R1", quantity: 2, name: "Rangpur"],
+                [code: "R1", quantity: 2, name: "Rangpur Sadar"],
+        ].each {
+            new Packager(it).save()
+        }
+    }
+
     def init(){
         category()
         product()
@@ -126,6 +138,7 @@ class InitDataService {
         customer()
         discountAssociation()
         discount()
+        packager()
     }
 
 }
